@@ -1,0 +1,29 @@
+# React Frontend Node modules & build outputs
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+frontend/.env
+
+# Java Backend compiled bytecodes & local db serialization
+backend/bin/
+backend/**/*.class
+backend/*.dat
+backend/*.log
+
+# Logs & temp files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+.stylelintcache
+
+# IDE Configs
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
