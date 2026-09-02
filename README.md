@@ -1,4 +1,4 @@
-# GoPlan — Smart Journey Organizer
+# GoPlan — Smart Journey Organizer-
 
 > Plan Smarter, Travel Better!
 
@@ -6,7 +6,7 @@ GoPlan is a complete, feature-rich travel-planning web application designed for 
 
 ---
 
-## 1. TECHNOLOGY STACK
+## 1. TECHNOLOGY STACK-
 
 * **Frontend**: React, TypeScript, Vite, Tailwind CSS, Lucide React
 * **Backend (OOP Prototype)**: Core Java (JDK 8+), Java Date/Time Temporal API, custom Exception Handling, File Serialization DB
@@ -14,7 +14,7 @@ GoPlan is a complete, feature-rich travel-planning web application designed for 
 
 ---
 
-## 2. KEY FEATURES
+## 2. KEY FEATURES-
 
 * 📁 **Authentication**: Mock login and registration forms with validation checks, password visibility toggles, and persistent login states.
 * 📊 **Dashboard**: Summary stats (Total Trips, Spent vs Budget, Packed items) with interactive warning flags and custom SVG graphs.
@@ -28,7 +28,7 @@ GoPlan is a complete, feature-rich travel-planning web application designed for 
 
 ---
 
-## 3. FOLDER STRUCTURE
+## 3. FOLDER STRUCTURE-
 
 ```text
 GoPlan/
@@ -64,7 +64,7 @@ GoPlan/
 
 ---
 
-## 4. GETTING STARTED
+## 4. GETTING STARTED-
 
 ### Running the Frontend (React + Vite)
 Ensure you have [Node.js](https://nodejs.org) installed.
@@ -85,7 +85,7 @@ Ensure you have [Node.js](https://nodejs.org) installed.
 
 ---
 
-### Running the Backend (Core Java OOP)
+### Running the Backend (Core Java OOP)-
 Requires [Java JDK](https://www.oracle.com/java/technologies/downloads/) (JDK 8 or above).
 
 1. Navigate to the `backend/` directory:
@@ -104,7 +104,7 @@ Requires [Java JDK](https://www.oracle.com/java/technologies/downloads/) (JDK 8 
 
 ---
 
-## 5. FUTURE ENHANCEMENTS
+## 5. FUTURE ENHANCEMENTS-
 
 1. **REST Integration**: Replace the frontend client `localStorage` service layer inside `frontend/src/services` with actual `fetch` HTTP REST API requests pointing to endpoints.
 2. **Spring Boot MVC**: Expose the backend `Service` and `Repository` modules as JSON REST endpoints via Spring Boot controllers (e.g. `@RestController`).
