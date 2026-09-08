@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GoPlan — Smart Journey Organizer
 
 > Plan Smarter, Travel Better!
@@ -109,3 +110,25 @@ Requires [Java JDK](https://www.oracle.com/java/technologies/downloads/) (JDK 8 
 1. **REST Integration**: Replace the frontend client `localStorage` service layer inside `frontend/src/services` with actual `fetch` HTTP REST API requests pointing to endpoints.
 2. **Spring Boot MVC**: Expose the backend `Service` and `Repository` modules as JSON REST endpoints via Spring Boot controllers (e.g. `@RestController`).
 3. **Database Integration**: Connect repositories to a MySQL / PostgreSQL database using JDBC or Spring Data JPA.
+=======
+# Vite ⚡
+
+> Next Generation Frontend Tooling
+
+- 💡 Instant Server Start
+- ⚡️ Lightning Fast HMR
+- 🛠️ Rich Features
+- 📦 Optimized Build
+- 🔩 Universal Plugin Interface
+- 🔑 Fully Typed APIs
+
+Vite (French word for "quick", pronounced [`/viːt/`](https://cdn.jsdelivr.net/gh/vitejs/vite@main/docs/public/vite.mp3), like "veet") is a build tool that aims to provide a faster and leaner development experience for modern web projects. It consists of two major parts:
+
+- A dev server that provides [rich feature enhancements](https://vite.dev/guide/features) over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), for example extremely fast [Hot Module Replacement (HMR)](https://vite.dev/guide/features#hot-module-replacement).
+
+- A build command that bundles your code with [Rolldown](https://rolldown.rs), pre-configured to output highly optimized static assets for production.
+
+In addition, Vite is highly extensible via its [Plugin API](https://vite.dev/guide/api-plugin.html) and [JavaScript API](https://vite.dev/guide/api-javascript.html) with full typing support.
+
+[Read the Docs to Learn More](https://vite.dev).
+>>>>>>> c9f2049ebc037bafadcf517b6985c40a3e4fa23f
