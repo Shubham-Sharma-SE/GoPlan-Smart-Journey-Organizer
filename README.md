@@ -1,7 +1,6 @@
 # GoPlan — Smart Journey Organizer
-
-> **Plan Smarter, Travel Better!**
 --Used "AI-agent"
+> **Plan Smarter, Travel Better!**
 GoPlan is a smart travel-planning application designed to help users organize trips, manage expenses, maintain checklists, and keep important travel information in one place.
 
 The project combines a **React + TypeScript frontend** with a **Core Java OOP backend prototype**.
