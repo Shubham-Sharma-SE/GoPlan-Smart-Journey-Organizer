@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bharat Yatra – Indian Tourist Trip Planner</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="#" class="brand-logo" onclick="switchTab('explore'); return false;">
+        <div class="brand-symbol">BY</div>
+        <div class="brand-text">
+          <h1>Bharat Yatra</h1>
+          <span>Indian Tourist Trip Planner</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><button class="nav-btn active" data-tab="explore">Explore Places</button></li>
+        <li><button class="nav-btn" data-tab="calculator">Ticket Calculator</button></li>
+        <li><button class="nav-btn" data-tab="planner">Trip Planner</button></li>
+        <li><button class="nav-btn" data-tab="trips">My Saved Trips</button></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-primary btn-sm" id="user-profile-btn" onclick="openModal('auth-modal')">Aarav</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="container">
+      <span class="hero-badge">Discover Incredible India</span>
+      <h1 class="hero-title">Experience the Soul of India with Bharat Yatra</h1>
+      <p class="hero-subtitle">
+        Plan customized itineraries across Indian states, calculate tourist entry ticket discounts based on age and gender, and estimate your complete travel budget with transparent expense tracking.
+      </p>
+
+      <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+        <button class="btn btn-accent" data-goto="planner">Plan a New Trip</button>
+        <button class="btn btn-outline" style="color:#fff; border-color:rgba(255,255,255,0.4);" data-goto="calculator">Ticket Calculator</button>
+        <button class="btn btn-outline" style="color:#fff; border-color:rgba(255,255,255,0.4);" data-goto="explore">Explore Destinations</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">22+</div>
+          <div class="stat-label">Iconic Destinations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">7</div>
+          <div class="stat-label">Tourism Categories</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Free Entry Under 8</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">50%</div>
+          <div class="stat-label">Women & Senior Discount</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Areas (Tabbed) -->
+  <main class="container">
+
+    <!-- ====================================================================
+         TAB 1: EXPLORE DESTINATIONS
+         ==================================================================== -->
+    <section id="section-explore" class="section tab-section">
+      <div class="section-header">
+        <span class="section-tag">Tourist Attractions</span>
+        <h2 class="section-title">Explore Destinations Across India</h2>
+        <p class="section-desc">Search, filter by state, explore historical monuments, hill stations, wildlife sanctuaries, and beaches.</p>
+      </div>
+
+      <!-- Filter & Search Toolbar -->
+      <div class="filter-toolbar">
+        <div class="search-input-wrap">
+          <input type="text" id="search-input" class="search-input" placeholder="Search by destination name, city, state, or category..." />
+        </div>
+        <div class="filter-selects">
+          <select id="filter-state" class="select-box">
+            <option value="All">All States</option>
+          </select>
+          <select id="sort-select" class="select-box">
+            <option value="default">Sort by: Default</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name-asc">Name: A to Z</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="category-pills" id="category-pills"></div>
+
+      <!-- Counter -->
+      <div style="margin-bottom:16px; font-size:13px; font-weight:700; color:#64748b;" id="dest-count-label">
+        Loading destinations...
+      </div>
+
+      <!-- Destinations Grid -->
+      <div class="destinations-grid" id="destinations-grid"></div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 2: AGE-BASED TICKET CALCULATOR
+         ==================================================================== -->
+    <section id="section-calculator" class="section tab-section" style="display:none;">
+      <div class="section-header">
+        <span class="section-tag">Age-Based Pricing</span>
+        <h2 class="section-title">Tourist Entry Ticket Calculator</h2>
+        <p class="section-desc">Calculates individual ticket rates based on visitor age, planned visit date, and configured discount categories.</p>
+      </div>
+
+      <div class="calculator-wrap">
+        <!-- Left: Configuration & Add Form -->
+        <div class="card">
+          <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin-bottom:16px;">1. Destination & Visit Date</h3>
+          
+          <div class="form-group">
+            <label class="form-label" for="calc-destination">Select Tourist Attraction:</label>
+            <select id="calc-destination" class="form-control"></select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="calc-date">Planned Travel Date:</label>
+            <input type="date" id="calc-date" class="form-control" />
+          </div>
+
+          <hr style="border:none; border-top:1px solid #e2e8f0; margin:24px 0;" />
+
+          <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin-bottom:16px;">2. Add Traveller to Calculation</h3>
+
+          <div class="form-group">
+            <label class="form-label" for="calc-visitor-name">Traveller Full Name:</label>
+            <input type="text" id="calc-visitor-name" class="form-control" placeholder="e.g. Master Rohan" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="calc-visitor-dob">Date of Birth:</label>
+              <input type="date" id="calc-visitor-dob" class="form-control" value="2000-01-01" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="calc-visitor-gender">Gender:</label>
+              <select id="calc-visitor-gender" class="form-control">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="btn-add-visitor" style="width:100%; margin-top:8px;">+ Add Visitor</button>
+
+          <!-- Rules Notice Box -->
+          <div class="rule-box">
+            <h4>Configured Project Discount Rules:</h4>
+            <ul>
+              <li><strong>Children below 8 years:</strong> FREE Entry (100% discount regardless of gender).</li>
+              <li><strong>Women (ages 8 to 60):</strong> 50% discount on base ticket price.</li>
+              <li><strong>Senior Citizens (strictly above 60):</strong> 50% discount on base ticket price.</li>
+              <li><strong>Other Visitors:</strong> Full ticket price.</li>
+              <li><i>Single discount policy: Discounts never compound (discounts apply once per traveller).</i></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right: Visitors List & Summary -->
+        <div class="card">
+          <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin-bottom:12px;">Traveller Discount Breakdown</h3>
+          <p style="font-size:13px; color:#64748b; margin-bottom:16px;">Real-time age calculation as of the planned travel date.</p>
+
+          <div class="visitor-list" id="calculator-visitor-list"></div>
+
+          <!-- Summary Bar -->
+          <div class="summary-bar">
+            <div>
+              <div class="summary-stat-label">Travellers</div>
+              <div class="summary-stat-value" id="calc-stat-travellers">0</div>
+            </div>
+            <div>
+              <div class="summary-stat-label">Base Cost</div>
+              <div class="summary-stat-value" id="calc-stat-base">₹ 0.00</div>
+            </div>
+            <div>
+              <div class="summary-stat-label">Total Savings</div>
+              <div class="summary-stat-value" style="color:#4ade80;" id="calc-stat-savings">₹ 0.00</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; padding:16px; background:#f0fdf4; border-radius:10px; border:1px solid #bbf7d0; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-size:12px; color:#166534; font-weight:700; text-transform:uppercase;">Final Payable Amount:</span>
+              <div style="font-size:24px; font-weight:800; color:#14532d;" id="calc-stat-payable">₹ 0.00</div>
+            </div>
+            <button class="btn btn-accent btn-sm" data-goto="planner">Use in Trip Planner</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 3: TRIP PLANNER & BUDGET CALCULATOR
+         ==================================================================== -->
+    <section id="section-planner" class="section tab-section" style="display:none;">
+      <div class="section-header">
+        <span class="section-tag">Interactive Planner</span>
+        <h2 class="section-title">Plan Your Tour Itinerary & Budget</h2>
+        <p class="section-desc">Add multiple destinations, configure travellers with age discounts, and estimate accommodation, travel, and food expenses.</p>
+      </div>
+
+      <div class="planner-grid">
+        <!-- Left: Configuration Form -->
+        <div>
+          <!-- Step 1: Trip Info -->
+          <div class="card" style="margin-bottom:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <h3 style="font-size:17px; font-weight:800; color:#0f172a;">1. Trip Name & Travel Dates</h3>
+              <span class="trip-duration-badge" id="planner-duration-badge">6 Days Tour</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="planner-trip-name">Itinerary Name:</label>
+              <input type="text" id="planner-trip-name" class="form-control" value="Golden Triangle Heritage Tour" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="planner-start-date">Start Date:</label>
+                <input type="date" id="planner-start-date" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="planner-return-date">Return Date:</label>
+                <input type="date" id="planner-return-date" class="form-control" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Selected Attractions -->
+          <div class="card" style="margin-bottom:24px;">
+            <h3 style="font-size:17px; font-weight:800; color:#0f172a; margin-bottom:12px;">2. Add Tourist Attractions</h3>
+            
+            <div style="display:flex; gap:10px;">
+              <select id="planner-dest-select" class="form-control" style="flex:1;"></select>
+              <button class="btn btn-accent" id="btn-add-spot-planner">+ Add Attraction</button>
+            </div>
+
+            <div class="selected-spots" id="planner-selected-chips"></div>
+          </div>
+
+          <!-- Step 3: Travellers -->
+          <div class="card">
+            <h3 style="font-size:17px; font-weight:800; color:#0f172a; margin-bottom:12px;">3. Travellers & Entry Passes</h3>
+
+            <div style="display:grid; grid-template-columns:1.2fr 1fr 0.8fr auto; gap:8px; margin-bottom:14px;">
+              <input type="text" id="planner-traveller-name" class="form-control" placeholder="Name" />
+              <input type="date" id="planner-traveller-dob" class="form-control" value="2000-01-01" />
+              <select id="planner-traveller-gender" class="form-control">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <button class="btn btn-primary" id="btn-add-planner-traveller">+ Add</button>
+            </div>
+
+            <div class="visitor-list" id="planner-travellers-list" style="max-height:220px;"></div>
+          </div>
+        </div>
+
+        <!-- Right: Budget & Analytics -->
+        <div>
+          <div class="card" style="position:sticky; top:90px;">
+            <h3 style="font-size:18px; font-weight:800; color:#0f172a; margin-bottom:16px;">4. Expense Breakdown & Budget</h3>
+
+            <!-- Sliders / Numeric Inputs -->
+            <div class="form-group">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <label class="form-label">Accommodation & Hotel Stay (₹):</label>
+              </div>
+              <input type="number" id="planner-stay-input" class="form-control" value="12000" step="500" min="0" />
+            </div>
+
+            <div class="form-group">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <label class="form-label">Transportation & Flights/Cab (₹):</label>
+              </div>
+              <input type="number" id="planner-travel-input" class="form-control" value="6500" step="500" min="0" />
+            </div>
+
+            <div class="form-group">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <label class="form-label">Food, Dining & Snacks (₹):</label>
+              </div>
+              <input type="number" id="planner-food-input" class="form-control" value="5500" step="500" min="0" />
+            </div>
+
+            <!-- Canvas Visual Chart -->
+            <div class="chart-container">
+              <canvas id="planner-chart" width="220" height="200"></canvas>
+            </div>
+
+            <!-- Total Budget Summary -->
+            <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:16px; margin:20px 0;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px; color:#64748b;">
+                <span>Total Ticket Passes:</span>
+                <strong id="planner-stat-tickets" style="color:#14532d;">₹ 0.00</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; border-top:2px solid #0f172a; padding-top:10px; margin-top:10px;">
+                <span style="font-weight:800; color:#0f172a; font-size:16px;">ESTIMATED TOTAL:</span>
+                <span style="font-weight:800; color:#c2410c; font-size:22px;" id="planner-stat-total">₹ 0.00</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" id="btn-save-trip" style="width:100%; padding:12px; font-size:15px;">
+              Save Trip & Generate Itinerary
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 4: MY SAVED TRIPS
+         ==================================================================== -->
+    <section id="section-trips" class="section tab-section" style="display:none;">
+      <div class="section-header" style="display:flex; justify-content:space-between; align-items:flex-end;">
+        <div>
+          <span class="section-tag">Travel Management</span>
+          <h2 class="section-title">My Saved Travel Itineraries</h2>
+          <p class="section-desc">Manage your planned itineraries, modify travel dates, adjust budgets, and print travel summaries.</p>
+        </div>
+        <button class="btn btn-primary" data-goto="planner">+ Plan New Trip</button>
+      </div>
+
+      <div class="trips-container" id="my-trips-list"></div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       MODALS
+       ==================================================================== -->
+
+  <!-- Modal 1: Destination Quick View -->
+  <div class="modal-overlay" id="dest-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Attraction Overview</h3>
+        <button class="modal-close" onclick="closeModal('dest-modal')">&times;</button>
+      </div>
+      <div class="modal-body" id="dest-modal-content"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('dest-modal')">Close</button>
+        <button class="btn btn-primary" id="dest-modal-plan-btn">+ Add to Trip Planner</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Printable Itinerary Voucher -->
+  <div class="modal-overlay" id="itinerary-modal">
+    <div class="modal-box" style="max-width:700px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Trip Summary & Travel Voucher</h3>
+        <button class="modal-close" onclick="closeModal('itinerary-modal')">&times;</button>
+      </div>
+      <div class="modal-body" id="itinerary-modal-content"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('itinerary-modal')">Close</button>
+        <button class="btn btn-accent" id="btn-print-itinerary">Print Itinerary / Save PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: User Authentication & Demo Account -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-box" style="max-width:440px;">
+      <div class="modal-header">
+        <h3 class="modal-title">User Account</h3>
+        <button class="modal-close" onclick="closeModal('auth-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:16px; margin-bottom:16px;">
+          <div style="font-weight:700; color:#0f172a; margin-bottom:4px;">Aarav Sharma</div>
+          <div style="font-size:13px; color:#64748b;">aarav.sharma@example.com</div>
+          <div style="font-size:12px; color:#166534; font-weight:600; margin-top:8px;">Signed in to Bharat Yatra</div>
+        </div>
+        <p style="font-size:13px; color:#64748b; line-height:1.5;">
+          All planned itineraries and calculations are automatically synchronized with your active session and persistent storage.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('auth-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h2>Bharat Yatra</h2>
+          <p style="color:#94a3b8; font-size:13px; margin-top:4px;">Indian Tourist Trip Planner & Itinerary System</p>
+        </div>
+        <div style="display:flex; gap:16px;">
+          <button class="btn btn-outline btn-sm" style="color:#fff; border-color:rgba(255,255,255,0.2);" data-goto="explore">Destinations</button>
+          <button class="btn btn-outline btn-sm" style="color:#fff; border-color:rgba(255,255,255,0.2);" data-goto="calculator">Calculator</button>
+          <button class="btn btn-outline btn-sm" style="color:#fff; border-color:rgba(255,255,255,0.2);" data-goto="planner">Trip Planner</button>
+        </div>
+      </div>
+      <div class="footer-copy">
+        Bharat Yatra • Complete Second-Year College OOP Project • Designed for Indian Tourism
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/destinations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
